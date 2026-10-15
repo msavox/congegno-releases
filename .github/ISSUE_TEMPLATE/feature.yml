@@ -1,0 +1,11 @@
+name: Feature request
+description: Something Congegno should do
+labels: [enhancement]
+body:
+  - type: textarea
+    id: need
+    attributes: {label: What you want to do, description: The task, and how you would do it today (in Congegno or another tool).}
+    validations: {required: true}
+  - type: textarea
+    id: idea
+    attributes: {label: How it could work}
