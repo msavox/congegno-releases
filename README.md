@@ -7,7 +7,7 @@ multibody mechanics, physical networks and state machines live in one model, in 
 
 *Congegno* is Italian for "mechanism" (con-JEN-yo).
 
-![A pendulum's model, its 3D view and the Library](images/workspace.png)
+![An electric car's powertrain on the canvas: battery, inverter and motor as physical networks, field-oriented control in blocks, a thermal network](images/workspace.png)
 
 This repository holds Congegno's **downloads**, its **release notes** and its **issue reports**. Congegno is free to
 try under the [Congegno Preview Licence](LICENSE.md). It is not open source.
@@ -31,27 +31,25 @@ try under the [Congegno Preview Licence](LICENSE.md). It is not open source.
 - **Everything is a file**: a model is a plain text file you can read, compare and keep under Git.
 
 ![A cart-pole balanced by an LQR controller, with its scope](images/control.png)
-![A dashboard built from the model's probes](images/dashboard.png)
+![A satellite's dashboard built from the model's probes, beside its 3D view](images/dashboard.png)
 ![Two robot arms picking and placing, one of the examples](images/panda.png)
 
-The examples that come with Congegno (Help ▸ Examples…) are a good place to start.
+The eight examples on the start page (also Help ▸ Examples…) are a good place to start: each card copies one into your project and runs its init script.
 
 ## Download
 
-Get the latest build from [Releases](../../releases). Congegno is a preview: expect rough edges, and tell us about
-them.
+The current build is **[0.1.0-preview.2](../../releases/tag/v0.1.0-preview.2)**, a free preview. Expect rough edges, and tell us about them.
 
-| System | File |
+| System | Download |
 |---|---|
-| macOS, Apple Silicon | `Congegno-<version>-arm64.dmg` |
-| macOS, Intel | `Congegno-<version>-x64.dmg` |
-| Linux x86_64 | `Congegno-<version>-linux-x86_64.AppImage` |
-| Linux aarch64 | `Congegno-<version>-linux-aarch64.AppImage` (newer and less tested: tell us how it goes) |
-| Windows | coming: it will be added to this release once tested |
+| macOS, Apple Silicon | [`Congegno-0.1.0-preview.2-arm64.dmg`](https://github.com/msavox/congegno-releases/releases/download/v0.1.0-preview.2/Congegno-0.1.0-preview.2-arm64.dmg) |
+| macOS, Intel | [`Congegno-0.1.0-preview.2-x64.dmg`](https://github.com/msavox/congegno-releases/releases/download/v0.1.0-preview.2/Congegno-0.1.0-preview.2-x64.dmg) |
+| Linux x86_64 | [`Congegno-0.1.0-preview.2-linux-x86_64.AppImage`](https://github.com/msavox/congegno-releases/releases/download/v0.1.0-preview.2/Congegno-0.1.0-preview.2-linux-x86_64.AppImage) |
+| Windows 10 and 11, 64-bit | [`Congegno-0.1.0-preview.2-windows-x64.exe`](https://github.com/msavox/congegno-releases/releases/download/v0.1.0-preview.2/Congegno-0.1.0-preview.2-windows-x64.exe) |
 
 Each file has a `.sha256` beside it, and each is complete: its own Python, the engines, OpenModelica with the Modelica
-Standard Library and a C compiler. Nothing is downloaded when Congegno first starts, and you need no Xcode, Homebrew
-or Python of your own.
+Standard Library and a C compiler (on an Intel Mac and on Windows, inside the small Linux system that runs the
+engines). You need no Xcode, Homebrew or Python of your own. Every release is in [Releases](../../releases).
 
 ## System requirements
 
@@ -60,8 +58,12 @@ or Python of your own.
   itself: the download is about 1.5 GB larger, and Linux takes more disk once prepared. The first launch of a new
   version takes a minute or two to prepare it, and each launch about twenty seconds to start it. By default it gets
   all the cores and half the memory, at least 4 GB; File ▸ Back-End Settings… changes that.
-- **Linux**: x86_64 or aarch64, glibc 2.34 or later (Debian 12, Ubuntu 22.04, Fedora 35 and later), and FUSE
-  (`fuse3`; most desktops have it). No root access is needed. The AppImage is one file of under 1 GB.
+- **Linux**: x86_64, glibc 2.34 or later (Debian 12, Ubuntu 22.04, Fedora 35 and later), and FUSE (`fuse3`; most
+  desktops have it). No root access is needed. The AppImage is one file of under 1 GB.
+- **Windows**: Windows 10 (version 1809 or later) or 11, 64-bit, 8 GB of memory or more, and the **Windows Hypervisor
+  Platform** turned on. As on an Intel Mac, simulations run in a small Linux system that Congegno starts by itself,
+  under [QEMU](https://qemu.weilnetz.de/w64/), which Congegno does not include: it finds it, or installs it for you
+  from its publisher on its first start.
 
 ## Install on macOS
 
@@ -86,7 +88,7 @@ Without Terminal: open Congegno, let macOS refuse it, then go to System Settings
 With the GitHub CLI, one command downloads a release, checks its SHA-256 and installs it:
 
 ```sh
-gh release download <tag> --repo msavox/congegno-releases --pattern install_release.sh && bash install_release.sh <tag>
+gh release download v0.1.0-preview.2 --repo msavox/congegno-releases --pattern install_release.sh && bash install_release.sh v0.1.0-preview.2
 ```
 
 ## Install on Linux
@@ -94,33 +96,66 @@ gh release download <tag> --repo msavox/congegno-releases --pattern install_rele
 Make the AppImage executable and open it:
 
 ```sh
-chmod +x Congegno-<version>-linux-x86_64.AppImage
-./Congegno-<version>-linux-x86_64.AppImage
+chmod +x Congegno-0.1.0-preview.2-linux-x86_64.AppImage
+./Congegno-0.1.0-preview.2-linux-x86_64.AppImage
 ```
 
-Where FUSE is missing, `./Congegno-<version>-linux-x86_64.AppImage --appimage-extract-and-run` opens it.
+Where FUSE is missing, `./Congegno-0.1.0-preview.2-linux-x86_64.AppImage --appimage-extract-and-run` opens it.
 
 To install it with a desktop entry, icons and the file types of `.cgn` and `.cgnproj`, download
 `install_release_linux.sh` from the release, keep the AppImage's `.sha256` beside the AppImage, and run:
 
 ```sh
-bash install_release_linux.sh ./Congegno-<version>-linux-x86_64.AppImage
+bash install_release_linux.sh ./Congegno-0.1.0-preview.2-linux-x86_64.AppImage
 ```
 
 It checks the checksum, copies the AppImage to `~/Applications/Congegno.AppImage` and adds Congegno to your
 applications.
 
+## Install on Windows
+
+The installer is not signed yet, so Windows asks once.
+
+1. Turn on **Windows Hypervisor Platform**: Settings ▸ System ▸ Optional features ▸ More Windows features, tick it,
+   OK, and restart Windows. Or, in PowerShell as administrator:
+
+   ```powershell
+   Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform
+   ```
+
+2. Run `Congegno-0.1.0-preview.2-windows-x64.exe`. SmartScreen says it protected your PC: choose **More info ▸ Run
+   anyway**. No administrator is asked for: Congegno goes in your own programs folder.
+3. Open Congegno. Without QEMU the splash screen says so: **Download and Install QEMU** downloads Stefan Weil's
+   installer, checks it against its publisher's checksum, shows who signed it and runs it (Windows asks for
+   permission for that step only). Or install QEMU yourself and Congegno finds it, or point it at QEMU's folder with
+   **I Have QEMU In…**.
+4. Congegno then prepares its Linux, a few minutes the first time, and opens the workspace. Your projects live on
+   that Linux's disk: File ▸ Import from Windows brings files in, Export to Windows… in the Project panel's menu takes
+   them out, and File ▸ Back Up Projects… saves them all in one `.zip`.
+
 ## First launch
 
 Congegno first shows its terms, the Congegno Preview Licence: **Accept** to go on, or **Quit**. It asks once, and
-again only when a new version of the terms comes. Then it opens the folder `~/Congegno` as its project.
+again only when a new version of the terms comes. Then it opens the folder `~/Congegno` as its project (on Windows, a
+folder of its Linux's disk), and its start page offers eight working examples to copy and run.
+
+## Updates, and how long a preview runs
+
+Once a day Congegno reads this repository's list of releases and tells you when a newer preview, or the stable
+release, is out, with a link to its page; Help ▸ Check for Updates… asks now, and Help ▸ Check for Updates
+Automatically turns it off. Nothing is downloaded or installed for you.
+
+Each preview build runs for **90 days** from the day it was built, and says so two weeks ahead. After that it still
+opens your models and your runs, but starts no new runs until you install a newer one. A preview taken off this page
+tells you it was withdrawn.
 
 ## The licence, in short
 
 Congegno is free to download, install and use to try it, evaluate it, learn and teach with it, and for personal
 projects. It is not for production or commercial use yet: final terms will come. There is no warranty. What you make
 with it is yours, and you may share it. Congegno collects no telemetry and needs no account, licence key or
-activation. It is not open source; it runs open-source engines and libraries (Drake, MuJoCo, OpenModelica and
+activation; the only request it makes by itself is the daily look at this repository's releases, which you can turn
+off. Each preview build runs for 90 days. It is not open source; it runs open-source engines and libraries (Drake, MuJoCo, OpenModelica and
 others) under their own licences, listed in Help ▸ About Congegno ▸ Licences.
 
 The full text is in [LICENSE.md](LICENSE.md), and it is the one that counts.

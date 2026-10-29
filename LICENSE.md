@@ -1,6 +1,6 @@
 # Congegno Preview Licence
 
-Version 1 · 27 October 2026
+Version 2 · 29 October 2026
 
 Copyright © 2026 Matteo Savoia. All rights reserved.
 
@@ -14,7 +14,9 @@ installing or using Congegno you accept this licence. If you do not accept it, d
 - It is not for production or commercial use yet. Final terms will come.
 - There is no warranty. Check every result that matters by other means.
 - What you make with Congegno is yours, and you may share it.
-- No telemetry, no account, no licence key, no copy protection.
+- No telemetry, no account, no licence key. Once a day Congegno asks GitHub whether a newer version is out; you can
+  turn that off.
+- Each preview build runs for 90 days after it was built; then it asks you to install a newer one.
 
 This summary is for convenience. The numbered terms below are the licence.
 
@@ -51,17 +53,24 @@ share pictures, videos and comparisons of Congegno at work. Section 2(a) still a
 You may copy and change the examples that come with Congegno to learn and to start your own models. Files of others
 that an example includes keep their own licence, which sits beside them.
 
-## 4. No telemetry, no copy protection
+## 4. No telemetry, no activation
 
 Congegno collects no telemetry. It sends nothing about you, your computer or your work to the author or to anyone
-else. It needs no account, no licence key and no activation, and it contains no copy protection. It uses the network
-only when you ask it to: a link you open, an AI agent you start in its terminal, a Git remote you use.
+else. It needs no account, no licence key and no activation. It uses the network only when you ask it to (a link you
+open, an AI agent you start in its terminal, a Git remote you use) and for one thing of its own: once a day at most,
+it reads the public list of Congegno's releases on GitHub to tell you when a newer version is out. That request
+carries nothing but what any web request does, which GitHub sees under its own terms. Help ▸ Check for Updates
+Automatically turns it off.
 
 ## 5. A preview
 
 Congegno is a preview: it is incomplete, it changes often, and it may have errors and give wrong results. The author
 may change or stop the preview at any time. The author may end this licence for the preview builds by announcing it
-on the official download page at least 30 days ahead; after that date you must stop using them. A new version of
+on the official download page at least 30 days ahead; after that date you must stop using them.
+
+Each preview build runs for 90 days after the day it was built, a date it shows two weeks ahead. After it, the build
+still opens your models and runs, but no longer starts new runs: install a newer version from the official download
+page. A preview build the author withdraws from that page tells you so, and asks you to install the newer one. A new version of
 Congegno may come with new terms, which it will ask you to accept when it first starts.
 
 ## 6. Final terms
